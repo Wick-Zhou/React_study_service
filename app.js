@@ -6,6 +6,7 @@ const {onSelectOnlyUser,onSelectAddUser} = require('./db/editUserListdb')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+// 解决跨域
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
@@ -55,6 +56,18 @@ app.post('/register', function (req, res) {
   .catch(err => {
     console.log(err)
   })
+})
+
+app.get('/admin.php/test', function (req, res){
+  console.log('=========================================')
+  console.log(req);
+  // res.send(JSON.stringify({uploaded:[2,5,11,12]}))
+  res.send(JSON.stringify('upload-->test'))
+})
+app.post('/admin.php/test', function (req, res){
+  // console.log('=========================================');
+  console.log('chunk',req.body);
+  res.send(JSON.stringify('localhost test-->post'))
 })
 
 app.listen(5000, () => {
